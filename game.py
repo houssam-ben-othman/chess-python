@@ -6,7 +6,7 @@ class game:
         self.wplayer1 = wplayer1
         self.bplayer2 = bplayer2
 
-    def start(self):
+    def start(self): #to start the game by placing the pieces in their initial positions
         wrook1 = Rook("white",(0,0))
         wknight1 = Knight("white",(1,0))
         wbishop1 = Bishop("white",(2,0))
@@ -78,3 +78,10 @@ class game:
 
         self.wplayer1.pieces = [wrook1,wknight1,wbishop1,wqueen,wking,wbishop2,wknight2,wrook2,wpawn1,wpawn2,wpawn3,wpawn4,wpawn5,wpawn6,wpawn7,wpawn8]
         self.bplayer2.pieces = [brook1,bknight1,bbishop1,bqueen,bking,bbishop2,bknight2,brook2,bpawn1,bpawn2,bpawn3,bpawn4,bpawn5,bpawn6,bpawn7,bpawn8]
+    
+    def eat_piece(self, piece): #to remove a piece from the board and from the player's pieces when it's eaten by the opponent
+        if piece.color == "white":
+            self.wplayer1.sup_piece(piece)
+        else:
+            self.bplayer2.sup_piece(piece)
+    

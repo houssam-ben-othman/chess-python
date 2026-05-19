@@ -6,7 +6,7 @@ class Piece :
         self.pos = new_pos
     
 class Pawn(Piece) :
-    def move(self, new_pos) :
+    def move(self, new_pos) : #to move the pawn one or two steps forward if it's the first move, and one step forward otherwise
         if self.color == "white" :
             if ( self.pos[1]==1) :
                if (new_pos[1] == self.pos[1] + 1 and new_pos[0] == self.pos[0] or (new_pos[1] == self.pos[1] + 2 and new_pos[0] == self.pos[0])) :
@@ -14,8 +14,6 @@ class Pawn(Piece) :
             else :
                 if (new_pos[1] == self.pos[1] + 1 and new_pos[0] == self.pos[0]) :
                     self.pos = new_pos
-                    
-            
         else :
             if ( self.pos[1]==6) :
                if (new_pos[1] == self.pos[1] - 1 and new_pos[0] == self.pos[0] or (new_pos[1] == self.pos[1] - 2 and new_pos[0] == self.pos[0])) :
@@ -24,19 +22,19 @@ class Pawn(Piece) :
                 if (new_pos[1] == self.pos[1] - 1 and new_pos[0] == self.pos[0]) :
                     self.pos = new_pos
 
-class Rook(Piece) :
+class Rook(Piece) : #to move the rook in a straight line either horizontally or vertically
     def move(self, new_pos) :
         if (new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) :
             self.pos = new_pos
 
-class Bishop(Piece) :
+class Bishop(Piece) : #to move the bishop in a straight line diagonally
     def move(self, new_pos) :
         for i in range(-7,8) :
             if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
                 self.pos = new_pos
                 break
 
-class Queen(Piece) :
+class Queen(Piece) : #to move the queen in a straight line either horizontally, vertically or diagonally
     def move(self, new_pos) :
         if new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1] :
             self.pos = new_pos
@@ -46,7 +44,7 @@ class Queen(Piece) :
                     self.pos = new_pos
                     break
 
-class King(Piece) :
+class King(Piece) : #to move the king one step in any direction
     def move(self, new_pos) :
         flag=False
         for i in range(-1,2) :
@@ -58,7 +56,7 @@ class King(Piece) :
             if (flag==True):
                     break
 
-class Knight(Piece) :
+class Knight(Piece) : #to move the knight in an L shape
     def move(self, new_pos) :
         if ((new_pos[0] == self.pos[0]+1 and new_pos[1] == self.pos[1]+2) or (new_pos[0] == self.pos[0]+1 and new_pos[1] == self.pos[1]-2) or (new_pos[0] == self.pos[0]+2 and new_pos[1] == self.pos[1]+1) or (new_pos[0] == self.pos[0]+2 and new_pos[1] == self.pos[1]-1) or(new_pos[0]==self.pos[0]-2 and new_pos[1] == self.pos[1]+1) or (new_pos[0] == self.pos[0]-2 and new_pos[1] == self.pos[1]-1) or (new_pos[0] == self.pos[0]-1 and new_pos[1] == self.pos[1]+2) or (new_pos[0] == self.pos[0]-1 and new_pos[1] == self.pos[1]-2) ):
             self.pos = new_pos
