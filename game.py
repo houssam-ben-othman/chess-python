@@ -1,10 +1,12 @@
 from piece import * 
 from player import *
 class game:
-    def __init__(self, board, wplayer1, bplayer2):
+    def __init__(self, board, wplayer1, bplayer2,endgame=False, turn="White"):
         self.board = board
         self.wplayer1 = wplayer1
         self.bplayer2 = bplayer2
+        self.endgame = endgame
+        self.turn = turn
 
     def start(self): #to start the game by placing the pieces in their initial positions
         wrook1 = Rook("white",(0,0))
