@@ -10,3 +10,8 @@ class Board:
     
     def ReturnPiece(self, pos): #to return the piece in the given position
         return self.board[pos[0]][pos[1]]
+    
+    def cord_to_pos(self, cord): #to convert the coordinates to the position in the board
+        x = ord(cord[0]) - ord('a')
+        y = int(cord[1]) - 1
+        return (x,y)
