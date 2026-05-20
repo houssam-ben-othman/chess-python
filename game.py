@@ -1,7 +1,7 @@
 from piece import * 
 from player import *
 class game:
-    def __init__(self, board, wplayer1, bplayer2,endgame=False, turn="White"):
+    def __init__(self, board, wplayer1, bplayer2,endgame=False, turn="white"):
         self.board = board
         self.wplayer1 = wplayer1
         self.bplayer2 = bplayer2
