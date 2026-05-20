@@ -2,6 +2,7 @@ from game import *
 from board import *
 from player import *
 from piece import *
+
 if __name__ == "__main__":
     print("Welcome to Chess!")
     print("Player 1 is white and Player 2 is black.")
@@ -16,39 +17,37 @@ if __name__ == "__main__":
     white_player = Player(player1_name,"white", 600)
     black_player = Player(player2_name,"black", 600)
     b = Board()
-    game = game(b,white_player, black_player)
-    game.start()
-    while game.endgame==False:
-        if game.turn == "white":
+    chess_game = game(b,white_player, black_player)
+    chess_game.start()
+    while chess_game.endgame==False:
+        if chess_game.turn == "white":
             print("Player 1 (white), it's your turn.")
             move = input()
             if move == "resign":
-                print(game.end_game(white_player,resign=True))
+                print(chess_game.end_game(white_player,resign=True))
                 break
             else:
                 move = move.split()
                 start_pos = b.cord_to_pos(move[0])
                 end_pos = b.cord_to_pos(move[1])
-                if game.move_piece(white_player, start_pos, end_pos):
+                result = chess_game.move_piece(white_player, start_pos, end_pos)
+                if result:
                     print("Move successful!")
-                    print(game.end_game(black_player))
-                    game.end_turn(white_player,endturn=True)
                 else:
                     print("Invalid move. Please try again.")
         else:
             print("Player 2 (black), it's your turn.")
             move = input()
             if move == "resign":
-                print(game.end_game(black_player,resign=True))
+                print(chess_game.end_game(black_player,resign=True))
                 break
             else:
                 move = move.split()
                 start_pos = b.cord_to_pos(move[0])
                 end_pos = b.cord_to_pos(move[1])
-                if game.move_piece(black_player, start_pos, end_pos):
+                result = chess_game.move_piece(black_player, start_pos, end_pos)
+                if result:
                     print("Move successful!")
-                    print(game.end_game(white_player))
-                    game.end_turn(black_player,endturn=True)
                 else:
                     print("Invalid move. Please try again.")
-        
+            

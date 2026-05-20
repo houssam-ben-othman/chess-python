@@ -130,18 +130,21 @@ class game:
                 return "black wins"
             else:
                 return "white wins"
-        elif self.stalemate(player):
-            return "stalemate"
+        #elif self.stalemate(player):
+        #    return "stalemate"
         elif self.draw():
             return "draw"
         elif resign==True:
             return self.resign(player,resign)
         
+        
     def end_turn(self, player, endturn=False): #to end the turn for the player and start the timer for the opponent
         if player.color == "white" and endturn==True:
-            self.bplayer2.timer(self.bplayer2.time)
+            #self.bplayer2.timer(self.bplayer2.time)
+            self.turn = "black"
         elif player.color == "black" and endturn==True:
-            self.wplayer1.timer(self.wplayer1.time)
+            #self.wplayer1.timer(self.wplayer1.time)
+            self.turn = "white"
     
     def play_turn(self, player, piece, new_pos):
         if piece.color != player.color:
