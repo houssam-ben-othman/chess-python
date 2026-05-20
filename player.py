@@ -1,9 +1,10 @@
 import time 
 class Player:
-    def __init__(self, color,s):
+    def __init__(self, name, color, s):
+        self.name = name
         self.color = color
         self.pieces = []
-        self.time=s
+        self.time = s
 
     def timer(self,s): #to create a timer for each player
         def wrapper(s, t):
