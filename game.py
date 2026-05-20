@@ -152,3 +152,14 @@ class game:
         self.board.board[old_pos[0]][old_pos[1]] = 0
         self.end_turn(player, endturn=True)
         return self.end_game(player)
+
+    def move_piece(self, player, start_pos, end_pos):
+        piece = self.board.ReturnPiece(start_pos)
+        if piece == 0:
+            return False
+        if piece.color != player.color:
+            return False
+        if not piece.can_move(end_pos):
+            return False
+        self.play_turn(player, piece, end_pos)
+        return True
