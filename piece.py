@@ -41,56 +41,62 @@ class Pawn(Piece) :
         return False
 class Rook(Piece) : #to move the rook in a straight line either horizontally or vertically
     def move(self, new_pos) :
-        if (new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) :
+        if ((new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) and new_pos != self.pos) :
             self.pos = new_pos
 
     def can_move(self, new_pos) :
-        if (new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) :
+        if ((new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) and new_pos != self.pos) :
             return True
         return False
 
 class Bishop(Piece) : #to move the bishop in a straight line diagonally
     def move(self, new_pos) :
         for i in range(-7,8) :
-            if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
-                self.pos = new_pos
+            if i != 0 :
+                if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
+                    self.pos = new_pos
 
     def can_move(self, new_pos) :
         for i in range(-7,8) :
-            if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
-                return True
+            if i != 0 :
+                if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
+                    return True
         return False
 
 class Queen(Piece) : #to move the queen in a straight line either horizontally, vertically or diagonally
     def can_move(self, new_pos) :
-        if new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1] :
+        if (new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) and new_pos != self.pos :
             return True
         else :
             for i in range(-7,8) :
-                if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
-                    return True
+                if i != 0 :
+                    if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
+                        return True
         return False
     
     def move(self, new_pos) :
-        if new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1] :
+        if (new_pos[0] == self.pos[0] or new_pos[1] == self.pos[1]) and new_pos != self.pos :
             self.pos = new_pos
         else :
             for i in range(-7,8) :
-                if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
-                    self.pos = new_pos
+                if i != 0 :
+                    if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
+                        self.pos = new_pos
 
 class King(Piece) : #to move the king one step in any direction
     def move(self, new_pos) :
         for i in range(-1,2) :
             for j in range(-1,2) :
-                if (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1] +j):
-                    self.pos = new_pos
+                if not (i == 0 and j == 0) :
+                    if (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1] +j):
+                        self.pos = new_pos
     
     def can_move(self, new_pos) :
         for i in range(-1,2) :
             for j in range(-1,2) :
-                if (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1] +j):
-                    return True
+                if not (i == 0 and j == 0) :
+                    if (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1] +j):
+                        return True
         return False
 
 class Knight(Piece) : #to move the knight in an L shape
