@@ -8,36 +8,40 @@ class Piece :
         return False
     
 class Pawn(Piece) :
-    def move(self, new_pos) : #to move the pawn one or two steps forward if it's the first move, and one step forward otherwise
+        def move(self, new_pos) : #to move the pawn one or two steps forward if it's the first move, one step forward otherwise, or one step diagonally to capture
         if self.color == "white" :
             if ( self.pos[1]==1) :
                if (new_pos[1] == self.pos[1] + 1 and new_pos[0] == self.pos[0] or (new_pos[1] == self.pos[1] + 2 and new_pos[0] == self.pos[0])) :
-                    self.pos = new_pos
             else :
                 if (new_pos[1] == self.pos[1] + 1 and new_pos[0] == self.pos[0]) :
                     self.pos = new_pos
+            if (new_pos[1] == self.pos[1] + 1 and (new_pos[0] == self.pos[0] + 1 or new_pos[0] == self.pos[0] - 1)) :
+                self.pos = new_pos
         else :
             if ( self.pos[1]==6) :
                if (new_pos[1] == self.pos[1] - 1 and new_pos[0] == self.pos[0] or (new_pos[1] == self.pos[1] - 2 and new_pos[0] == self.pos[0])) :
-                    self.pos = new_pos
             else :
                 if (new_pos[1] == self.pos[1] - 1 and new_pos[0] == self.pos[0]) :
                     self.pos = new_pos
+            if (new_pos[1] == self.pos[1] - 1 and (new_pos[0] == self.pos[0] + 1 or new_pos[0] == self.pos[0] - 1)) :
+                self.pos = new_pos
+
     def can_move(self, new_pos) :
         if self.color == "white" :
             if ( self.pos[1]==1) :
-               if (new_pos[1] == self.pos[1] + 1 and new_pos[0] == self.pos[0] or (new_pos[1] == self.pos[1] + 2 and new_pos[0] == self.pos[0])) :
-                    return True
             else :
                 if (new_pos[1] == self.pos[1] + 1 and new_pos[0] == self.pos[0]) :
                     return True
+            if (new_pos[1] == self.pos[1] + 1 and (new_pos[0] == self.pos[0] + 1 or new_pos[0] == self.pos[0] - 1)) :
+                return True
         else :
             if ( self.pos[1]==6) :
                if (new_pos[1] == self.pos[1] - 1 and new_pos[0] == self.pos[0] or (new_pos[1] == self.pos[1] - 2 and new_pos[0] == self.pos[0])) :
-                    return True
             else :
                 if (new_pos[1] == self.pos[1] - 1 and new_pos[0] == self.pos[0]) :
                     return True
+            if (new_pos[1] == self.pos[1] - 1 and (new_pos[0] == self.pos[0] + 1 or new_pos[0] == self.pos[0] - 1)) :
+                return True
         return False
 class Rook(Piece) : #to move the rook in a straight line either horizontally or vertically
     def move(self, new_pos) :
@@ -52,7 +56,7 @@ class Rook(Piece) : #to move the rook in a straight line either horizontally or 
 class Bishop(Piece) : #to move the bishop in a straight line diagonally
     def move(self, new_pos) :
         for i in range(-7,8) :
-            if i != 0 :
+           if i != 0 :
                 if ((new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]+i )or (new_pos[0] == self.pos[0]+i and new_pos[1] == self.pos[1]-i)) :
                     self.pos = new_pos
 
