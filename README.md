@@ -7,6 +7,7 @@ Jeu d'échecs en Python avec interface graphique, développé dans le cadre d'un
 - Apprendre la programmation orientée objet en Python
 - Transposer mes bases acquises en C# (POO) vers Python
 - Découvrir Pygame pour la visualisation graphique
+- Utilisation de Claude Code comme assistant de développement
 
 ## Technologies utilisées
 
@@ -33,7 +34,7 @@ pip install -r requirements.txt
 ### Lancement
 
 ```bash
-python main.py
+python ui.py
 ```
 
 ## Structure du projet
@@ -44,9 +45,13 @@ chess-python/
 ├── board.py       # Gestion du plateau
 ├── piece.py       # Classes des pièces
 ├── player.py      # Gestion des joueurs
-└── ui.py          # Interface graphique Pygame
+└── ui.py          # Interface graphique Pygame (Lancement du jeu)
 ```
 
 ## Statut
 
-🚧 En cours de développement
+🚧 Bêta — fonctionnalités principales complètes, des bugs peuvent subsister en cours de jeu
+
+## Bugs & améliorations
+
+Si vous repérez un bug en jouant, n'hésitez pas à ouvrir une [issue](https://github.com/houssam-ben-othman/chess-python/issues) pour me le signaler.
