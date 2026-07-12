@@ -1,15 +1,14 @@
-from piece import *
+from piece import * 
 from player import *
-
 class game:
-    def __init__(self, board, wplayer1, bplayer2, endgame=False, turn="white"):
+    def __init__(self, board, wplayer1, bplayer2,endgame=False, turn="white"):
         self.board = board
         self.wplayer1 = wplayer1
         self.bplayer2 = bplayer2
         self.endgame = endgame
         self.turn = turn
 
-    def start(self):
+    def start(self): #to start the game by placing the pieces in their initial positions
         wrook1 = Rook("white",(0,0))
         wknight1 = Knight("white",(1,0))
         wbishop1 = Bishop("white",(2,0))
@@ -81,64 +80,71 @@ class game:
         self.wplayer1.pieces = [wking,wrook1,wknight1,wbishop1,wqueen,wbishop2,wknight2,wrook2,wpawn1,wpawn2,wpawn3,wpawn4,wpawn5,wpawn6,wpawn7,wpawn8]
         self.bplayer2.pieces = [bking,brook1,bknight1,bbishop1,bqueen,bbishop2,bknight2,brook2,bpawn1,bpawn2,bpawn3,bpawn4,bpawn5,bpawn6,bpawn7,bpawn8]
 
-    def eat_piece(self, piece):
+    def eat_piece(self, piece): #to remove a piece from the board and from the player's pieces when it's eaten by the opponent
         if piece.color == "white":
             self.wplayer1.sup_piece(piece)
         else:
             self.bplayer2.sup_piece(piece)
-
-    def checkmate(self, player):
+    
+    def checkmate(self, player): #to check if the player is in checkmate
         if player.color == "white":
             opponent_pieces = self.bplayer2.pieces
             king_pos = self.wplayer1.pieces[0].pos
         else:
             opponent_pieces = self.wplayer1.pieces
             king_pos = self.bplayer2.pieces[0].pos
+        
         for piece in opponent_pieces:
             if piece.can_move(king_pos):
                 return True
         return False
-
-    def stalemate(self, player):
+    
+    def stalemate(self, player): #to check if the player is in stalemate
         if player.color == "white":
             opponent_pieces = self.bplayer2.pieces
             king_pos = self.wplayer1.pieces[0].pos
         else:
             opponent_pieces = self.wplayer1.pieces
             king_pos = self.bplayer2.pieces[0].pos
+        
         for piece in opponent_pieces:
             if piece.can_move(king_pos):
                 return False
         return True
-
-    def draw(self):
+    
+    def draw(self): #to check if the game is a draw
         if len(self.wplayer1.pieces) == 1 and len(self.bplayer2.pieces) == 1:
             return True
         return False
-
-    def resign(self, player, resign=False):
-        if player.color == "white" and resign == True:
+    
+    def resign(self, player,resign=False): #to allow the player to resign
+        if player.color == "white" and resign==True:
             return "black wins"
-        elif player.color == "black" and resign == True:
-            return "white wins"
-
-    def end_game(self, player, resign=False):
+        elif player.color == "black" and resign==True:
+            return "white wins" 
+    
+    def end_game(self, player,resign=False): #to end the game when a player is in checkmate, stalemate, draw or resigns
         if self.checkmate(player):
             if player.color == "white":
                 return "black wins"
             else:
                 return "white wins"
+        #elif self.stalemate(player):
+        #    return "stalemate"
         elif self.draw():
             return "draw"
-        elif resign == True:
-            return self.resign(player, resign)
-
-    def end_turn(self, player, endturn=False):
-        if player.color == "white" and endturn == True:
+        elif resign==True:
+            return self.resign(player,resign)
+        
+        
+    def end_turn(self, player, endturn=False): #to end the turn for the player and start the timer for the opponent
+        if player.color == "white" and endturn==True:
+            #self.bplayer2.timer(self.bplayer2.time)
             self.turn = "black"
-        elif player.color == "black" and endturn == True:
+        elif player.color == "black" and endturn==True:
+            #self.wplayer1.timer(self.wplayer1.time)
             self.turn = "white"
-
+    
     def play_turn(self, player, piece, new_pos):
         if piece.color != player.color:
             return "invalid move"
@@ -180,6 +186,12 @@ class game:
                     return False
                 if self.board.Taken_box(end_pos):
                     return False
+                if piece.color == "white" and end_pos[1] == start_pos[1] + 2:
+                    if self.board.Taken_box((start_pos[0], start_pos[1] + 1)):
+                        return False
+                elif piece.color == "black" and end_pos[1] == start_pos[1] - 2:
+                    if self.board.Taken_box((start_pos[0], start_pos[1] - 1)):
+                        return False
             else:
                 if not self.board.Taken_box(end_pos):
                     return False
