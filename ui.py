@@ -19,9 +19,6 @@ def draw_board():
 
 
 
-
-
-
 continuer = True
 while continuer:
     for event in pygame.event.get():

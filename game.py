@@ -156,7 +156,11 @@ class game:
         self.board.board[new_pos[0]][new_pos[1]] = piece
         self.board.board[old_pos[0]][old_pos[1]] = 0
         self.end_turn(player, endturn=True)
-        return self.end_game(player)
+        if player.color == "white":
+            opponent = self.bplayer2
+        else:
+            opponent = self.wplayer1
+        return self.end_game(opponent)
 
     def move_piece(self, player, start_pos, end_pos):
         piece = self.board.ReturnPiece(start_pos)
